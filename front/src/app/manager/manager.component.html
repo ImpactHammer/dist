@@ -1,0 +1,140 @@
+<div class="sidebar">
+  <!-- List of all devices -->
+  All devices:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedDeviceInstanceFromStorage" size="8">
+    <option *ngFor="let deviceInstance of totalDeviceInstanceList" [ngValue]="deviceInstance">
+      {{deviceInstance.device.name}}
+    </option>
+  </select>
+  <br>
+
+  <!-- List of masters -->
+  Masters:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedMaster" size="8">
+    <option *ngFor="let master of freeMasterList" [ngValue]="master">
+      {{master.name}}
+    </option>
+  </select>
+  <br>
+  
+  <!-- List of clients -->
+  Clients:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedClient" size="8" (click)="onClientSelected()">
+    <option *ngFor="let client of clientList" [ngValue]="client">
+      {{client.name}}
+    </option>
+  </select>
+  <br>
+
+</div>
+
+<div class="content">
+  
+  <!-- List of pending support requests -->
+  Pending support requests:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedPendingSupportRequest" size="8">
+    <option *ngFor="let request of pendingSupportRequestList" [ngValue]="request">
+      {{request.name}}
+    </option>
+  </select>
+  <br>
+
+  <!-- Description of support request -->
+  Description:
+  <br>
+  <textarea class="form-control" [value]="selectedPendingSupportRequest.description"></textarea>
+
+
+  <button class="btn btn-primary" (click)="assignSupportRequest()">
+    Assign support request
+  </button>
+  <br><br>
+
+  <!-- List of device requests -->
+  Device requests:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedDeviceRequest" size="8">
+    <option *ngFor="let deviceRequest of deviceRequestList" [ngValue]="deviceRequest">
+      Device request #{{deviceRequest.id}}
+    </option>
+  </select>
+  <br><br>
+
+  <!-- List of devices in selected device request -->
+  Devices in device request:
+  <br>
+  <div *ngIf="selectedDeviceRequest">
+    <select class="form-control" [(ngModel)]="selectedDeviceFromRequest" size="8">
+      <option *ngFor="let deviceBunch of selectedDeviceRequest.deviceBunchList" [ngValue]="deviceBunch">
+
+        Device: {{deviceBunch.device.name}}; device id: #{{deviceBunch.device.id}}
+      </option>
+    </select>
+  </div>
+  <br>
+  
+  <button class="btn btn-primary" (click)="confirmDeviceRequest()">
+    Confirm device request
+  </button>
+  
+  <button class="btn btn-danger" (click)="declineDevicesRequest()">
+    Decline device request
+  </button>
+  <br><br>
+
+  <!-- List of client's devices -->
+  Client's devices:
+  <br>
+  <select *ngIf="selectedClient" class="form-control" [(ngModel)]="selectedClientDevice" size="8">
+    <option *ngFor="let deviceInstance of selectedClientDeviceList" [ngValue]="deviceInstance">
+      Device: {{deviceInstance.device.name}} | serial number: #{{deviceInstance.id}}
+    </option>
+  </select>
+
+  <button class="btn btn-primary" (click)="assignDeviceToClient()">
+    Assign device to client
+  </button>
+  
+  <button class="btn btn-danger" (click)="unassignDeviceFromClient()">
+    Unassign device from client
+  </button>
+  <br><br>
+
+
+  <!-- List of diagnostics results -->
+  Diagnostics results:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedDiagnosticsResponse" size="8">
+    <option *ngFor="let result of diagnosticsResponseList" [ngValue]="result">
+      {{result.id}}
+    </option>
+  </select>
+  <br><br>
+
+
+  <input class="form-control" placeholder="Diagnostics request name" [(ngModel)]="newDiagnosticsRequestName" type="text"
+    value="">
+  <button class="btn btn-primary" (click)="assignDiagnosticsRequest()">
+    Assign diagnostics request
+  </button>
+  <br><br>
+
+  <!-- Description of diagnostics results -->
+  Diagnostics description:
+  <br>
+  <textarea class="form-control" *ngIf="selectedDiagnosticsResponse"
+    [value]="selectedDiagnosticsResponse.description"></textarea>
+  <br><br>
+
+  <button class="btn btn-primary" (click)="closeDiagnosticsRequest()">
+    Close diagnostics request
+  </button>
+
+  <button class="btn btn-primary" (click)="bill()">
+    Bill
+  </button>
+</div>

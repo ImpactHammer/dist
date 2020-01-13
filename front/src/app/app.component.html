@@ -1,0 +1,17 @@
+<div>
+    <div class="btn-group, topbar" role="group" style="display: flex" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" [title]="'client'" [routerLink]="['/client']">
+      Client
+    </button>
+        <button type="button" class="btn btn-primary" [title]="'manager'" [routerLink]="['/manager']">
+      Manager
+    </button>
+        <button type="button" class="btn btn-primary" [title]="'master'" [routerLink]="['/master']">
+      Master
+    </button>
+    </div>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

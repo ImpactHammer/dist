@@ -1,0 +1,143 @@
+<div class="sidebar">
+  Master name
+  <br>
+  <input class="form-control" [(ngModel)]="masterName" type="text" value="">
+  <button class="btn btn-primary" (click)="authorize()">Authorize</button>
+  <br><br>
+</div>
+
+<div class="content">
+  <!-- List of assigned support requests -->
+  Assigned support requests
+  <br>
+  <select class="form-control" [(ngModel)]="selectedAssignedSupportRequest" size="8">
+    <option *ngFor="let request of assignedSupportRequestList" [ngValue]="request">
+      {{request.name}}
+    </option>
+  </select>
+  <br>
+
+  <!-- Description of assigned support request -->
+  Assigned support request description:
+  <br>
+  <textarea class="form-control" *ngIf="selectedAssignedSupportRequest"
+    [value]="selectedAssignedSupportRequest.description"></textarea>
+  <br>
+
+  <button class="btn btn-primary" (click)="acceptSupportRequest()">
+    Accept support request
+  </button>
+
+  <button class="btn btn-danger" (click)="declineSupportRequest()">
+    Decline support request
+  </button>
+  <br><br>
+
+  <!-- List of accepted support requests -->
+  Accepted support requests
+  <br>
+  <select class="form-control" [(ngModel)]="selectedAcceptedSupportRequest" size="8">
+    <option *ngFor="let request of acceptedSupportRequestList" [ngValue]="request">
+      {{request.name}}
+    </option>
+  </select>
+  <br><br>
+
+  <!-- Description of accepted support request -->
+  Accepted support request description:
+  <br>
+  <textarea class="form-control" *ngIf="selectedAcceptedSupportRequest"
+    [value]="selectedAcceptedSupportRequest.description"></textarea>
+  <br>
+
+  <button class="btn btn-primary" (click)="closeSupportRequest()">
+    Close support request
+  </button>
+  <br><br>
+
+  <!-- List of assigned diagnostics requests -->
+  Assigned diagnostics requests
+  <br>
+  <select class="form-control" [(ngModel)]="selectedAssignedDiagnosticsRequest" size="8">
+    <option *ngFor="let request of assignedDiagnosticsRequestList" [ngValue]="request">
+      {{request.name}}
+    </option>
+  </select>
+  <br><br>
+
+  <!-- List of devices in selected assigned diagnostics request -->
+  Assigned diagnostics request devices:
+  <br>
+  <div *ngIf="selectedAssignedDiagnosticsRequest">
+    Device: {{selectedAssignedDiagnosticsRequest.deviceInstance.device.name}}
+  </div>
+  <br><br>
+
+  <button class="btn btn-primary" (click)="acceptDiagnosticsRequest()">
+    Accept diagnostics request
+  </button>
+
+  <button class="btn btn-danger" (click)="declineDiagnosticsRequest()">
+    Decline diagnostics request
+  </button>
+  <br><br>
+
+  <!-- List of accepted diagnostics requests -->
+  Accepted diagnostics requests
+  <br>
+  <select class="form-control" [(ngModel)]="selectedAcceptedDiagnosticsRequest" size="8">
+    <option *ngFor="let request of acceptedDiagnosticsRequestList" [ngValue]="request">
+      {{request.name}}
+    </option>
+  </select>
+  <br><br>
+
+  <!-- List of devices in selected accepted diagnostics request -->
+  Assigned diagnostics request devices:
+  <br>
+  <div *ngIf="selectedAcceptedDiagnosticsRequest">
+    Device: {{selectedAcceptedDiagnosticsRequest.deviceInstance.device.name}}
+  </div>
+  <br><br>
+
+  <!-- List of all devices -->
+  All devices:
+  <br>
+  <select class="form-control" [(ngModel)]="selectedDeviceFromStorage" size="8">
+    <option *ngFor="let device of deviceFromStorageList" [ngValue]="device">
+      {{device.name}}
+    </option>
+  </select>
+  <br><br>
+
+  <input class="form-control" type="number" min="1" [(ngModel)]="deviceCount">
+
+  <button class="btn btn-primary" (click)="addDeviceBunch()">
+    Add device bunch
+  </button>
+  <br><br>
+
+
+  <!-- List of chosen device bunches -->
+  Chosen device bunches:
+  <br>
+  <select class="form-control" multiple [(ngModel)]="chosenDeviceBunch" size="8">
+    <option *ngFor="let deviceBunch of deviceBunchList" [ngValue]="deviceBunch">
+      Device: {{deviceBunch.device.name}} | count: {{deviceBunch.count}}
+    </option>
+  </select>
+  <button class="btn btn-primary" (click)="createDeviceRequest()">
+    Create device request
+  </button>
+  <br><br>
+
+  Diagnostics Response
+  <br>
+  <!-- Diagnostics Response -->
+  <textarea class="form-control" [(ngModel)]="diagnosticsResponseDescription"></textarea>
+
+  <button class="btn btn-primary" (click)="closeDiagnosticsRequest()">
+    Close diagnostics request
+  </button>
+
+</div>

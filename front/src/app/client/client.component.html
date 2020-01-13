@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <input class="form-control" placeholder="Client name" [(ngModel)]="clientName" type="text" value="">
+  <button class="btn btn-primary" (click)="authorize()">Authorize</button>
+</div>
+
+<div class="content">
+  <input class="form-control" placeholder="Request name" [(ngModel)]="newRequestName" type="text" value="">
+
+  <!-- Description of support request being created -->
+  <textarea class="form-control" placeholder="Problem description" [(ngModel)]="newRequestDescription"></textarea>
+  <button class="btn btn-primary" (click)="sendRequest()">Create request</button>
+  <br><br>
+
+  <!-- List of support requests -->
+  <select class="form-control" [(ngModel)]="selectedSupportRequest" size="8">
+    <option *ngFor="let supportRequest of supportRequestList" [ngValue]="supportRequest">
+      {{supportRequest.name}}
+    </option>
+  </select>
+
+  <!-- Description of selected support request -->
+  <textarea class="form-control" [value]="selectedSupportRequest.name"></textarea>
+  <br>
+  <button class="btn btn-danger" (click)="closeRequest()">Close request</button>
+  <br><br>
+</div>
